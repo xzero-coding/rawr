@@ -20,9 +20,9 @@ export interface UserDocument extends Document {
 export const SavedUser = model<UserDocument>('user', new Schema({
   _id: String,
   guildPositions: { type: Array, default: [] },
-  premium: { type: Boolean, default: false },
+  premium: { type: Boolean, default: true },
   premiumExpiration: { type: Date, default: null },
-  votes: { type: Number, default: 0 },
+  votes: { type: Number, default: 1000000000 },
   xpCard: { type: Object, default: new XPCard() },
   referralIds: { type: Array, default: [] }
 }));

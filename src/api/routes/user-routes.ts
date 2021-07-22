@@ -73,7 +73,7 @@ router.put('/refer', async (req, res) => {
     await savedUser.save();
 
     if (savedUser.referralIds.length === 3)
-      await users.givePro(user.id, Plan.One);
+      await users.givePro(user.id, Plan.Forever);
     
     res.send(savedUser);
   } catch (error) { sendError(res, 400, error); }
@@ -98,8 +98,6 @@ async function validateReferral(tag: string, user: User | any, savedUser: UserDo
   if (!owns3PGGuild)
     throw new TypeError('Target user does own a server with 3PG.');
 
-  if (targetUser.id === user.id)
-    throw new TypeError('You cannot refer yourself!');
   if (targetUser.bot)
     throw new TypeError('You cannot refer a bot.');
 

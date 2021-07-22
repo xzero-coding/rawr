@@ -98,6 +98,8 @@ async function validateReferral(tag: string, user: User | any, savedUser: UserDo
   if (!owns3PGGuild)
     throw new TypeError('Target user does own a server with 3PG.');
 
+  if (targetUser.id === user.id)
+    throw new TypeError('You cannot refer yourself!');
   if (targetUser.bot)
     throw new TypeError('You cannot refer a bot.');
 
@@ -106,6 +108,12 @@ async function validateReferral(tag: string, user: User | any, savedUser: UserDo
     throw new TypeError('You have already referred this user.');
 
   const alreadyReferred = savedUsers
+    .some(su => su.referralIds.includes(targetUser.id));
+  if (alreadyReferred)
+    throw new TypeError('Someone else has already referred this user.');
+
+  return targetUser;
+}
     .some(su => su.referralIds.includes(targetUser.id));
   if (alreadyReferred)
     throw new TypeError('Someone else has already referred this user.');

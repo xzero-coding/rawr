@@ -30,6 +30,6 @@ export default class ReadyHandler implements EventHandler {
     this.music.initialize();
     await this.timers.init();
 
-    this.bot.user?.setActivity(`October 26, 2021`);
+    this.bot.user?.setActivity(`<t:1627768350:F>`);
   }
 }
